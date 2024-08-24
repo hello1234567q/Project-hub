@@ -32,12 +32,40 @@ local Tab4 = Window:CreateTab("Credits", 4483362458) -- Title, Image
 
 local Section = Tab:CreateSection("walkspeed and jump power")
 
+local InputValue = ""
+
 local Input = Tab:CreateInput({
    Name = "Set value",
    PlaceholderText = "Input Placeholder",
    RemoveTextAfterFocusLost = false,
    Callback = function(Text)
-   -- The function that takes place when the input is changed
-   -- The variable (Text) is a string for the value in the text box
+   InputValue = tonumber(Value)  -- Lưu giá trị từ TextBox
+       if not InputValue then
+           warn("Please enter a valid number.")
+         end
    end,
 })
+
+local Button = Tab:CreateButton({
+   Name = "Set walkspeed",
+   Callback = function()
+   -- The function that takes place when the button is pressed
+   if InputValue then
+           game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = InputValue
+       else
+           warn("Invalid or missing value for WalkSpeed.")
+         end
+   end,
+})
+
+local Button = Tab:CreateButton({
+   Name = "Set jumpower"
+   Callback = function()
+   if InputValue then
+           game.Players.LocalPlayer.Character.Humanoid.JumpPower = InputValue
+       else
+           warn("Invalid or missing value for JumpPower.")
+         end
+   end,
+})
+
